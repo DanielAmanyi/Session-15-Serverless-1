@@ -114,6 +114,8 @@ Steps:
 2. Click **Layers → Add a layer**
 3. Choose **"Specify an ARN"** and paste the layer ARN
 
+OPTION 2
+Download Pillow, embeded in the main branch within this repo and upload as a custom layer
 ---
 
 #### Step 5: Configure S3 Event Trigger
