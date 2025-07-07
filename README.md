@@ -115,7 +115,7 @@ Steps:
 3. Choose **"Specify an ARN"** and paste the layer ARN
 
 OPTION 2
-Download Pillow, embeded in the main branch within this repo and upload as a custom layer
+Download pillow-layer, embeded in the main branch within this repo, and upload to Lambda Layers as a custom layer
 ---
 
 #### Step 5: Configure S3 Event Trigger
