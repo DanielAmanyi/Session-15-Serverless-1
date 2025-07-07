@@ -49,6 +49,7 @@ This lab simulates workflows used in photo apps, e-commerce platforms, and moder
 4. Attach the following policies:
    - `AmazonS3FullAccess` (for testing; use tighter permissions in production)
    - `AWSLambdaBasicExecutionRole`
+   - 'CloudwatchFullAccess'
 5. Name the role: `lambda-s3-image-role`
 
 ---
@@ -129,15 +130,18 @@ Pillow is not built into Lambda by default. Use a public layer:
 ```
 arn:aws:lambda:us-east-1:770693421928:layer:Klayers-p312-Pillow:1
 ```
-OPTION 1:
+OPTION 1(Use an existing Layer):
 Steps:
 1. Go to your Lambda function
 2. Click **Layers → Add a layer**
 3. Choose **"Specify an ARN"** and paste the layer ARN
 
 ---
-OPTION 2:
-Download pillow-layer, embeded in the main branch within this repo, and upload to Lambda Layers as a custom layer
+OPTION 2(Create Custome Layer):
+Steps:
+1. Download pillow-layer, embeded in the main branch within this repo, go to Lambda main Menu->Additional resources-> layers -> Create Layer
+2. Click **Layers → Add a layer**
+3. Choose **"Specify an ARN"** and paste the layer ARN
 ---
 
 #### Step 5: Configure S3 Event Trigger
