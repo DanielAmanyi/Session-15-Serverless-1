@@ -125,10 +125,10 @@ Replace `image-output-bucket-<yourname>` with your actual output bucket name.
 
 Pillow is not built into Lambda by default. Use a public layer:
 
-- For `us-east-1`, Python 3.12:
+- For `us-east-1`, Python 3.13:
 
 ```
-arn:aws:lambda:us-east-1:770693421928:layer:Klayers-p312-Pillow:1
+https://serverlessrepo.aws.amazon.com/applications/us-east-1/302263061226/PillowLayerPython313
 ```
 OPTION 1(Use an existing Layer):
 Steps:
