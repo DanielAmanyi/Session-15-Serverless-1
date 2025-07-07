@@ -113,6 +113,8 @@ Steps:
 1. Go to your Lambda function
 2. Click **Layers → Add a layer**
 3. Choose **"Specify an ARN"** and paste the layer ARN
+
+---
 OPTION 2:
 Download pillow-layer, embeded in the main branch within this repo, and upload to Lambda Layers as a custom layer
 ---
