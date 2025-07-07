@@ -65,7 +65,7 @@ This lab simulates workflows used in photo apps, e-commerce platforms, and moder
 ```python
 import boto3
 import os
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 from io import BytesIO
 
 s3 = boto3.client('s3')
@@ -75,22 +75,43 @@ def lambda_handler(event, context):
     src_bucket = event['Records'][0]['s3']['bucket']['name']
     src_key = event['Records'][0]['s3']['object']['key']
 
-    obj = s3.get_object(Bucket=src_bucket, Key=src_key)
-    image_data = obj['Body'].read()
+    try:
+        obj = s3.get_object(Bucket=src_bucket, Key=src_key)
+        image_data = obj['Body'].read()
+        
+        with Image.open(BytesIO(image_data)) as img:
+            original_format = img.format  # e.g., PNG, BMP, etc.
+            
+            # Convert to RGB if image has alpha channel (transparency)
+            if img.mode in ("RGBA", "P"):
+                img = img.convert("RGB")
+            
+            buffer = BytesIO()
+            target_format = "JPEG" if original_format.upper() != "JPEG" else original_format
+            output_ext = ".jpg" if target_format == "JPEG" else "." + original_format.lower()
+            output_key = os.path.splitext(src_key)[0] + output_ext
+            
+            img.save(buffer, target_format)
+            buffer.seek(0)
 
-    with Image.open(BytesIO(image_data)) as img:
-        img = img.convert("RGB")
-        buffer = BytesIO()
-        output_key = os.path.splitext(src_key)[0] + ".jpg"
-        img.save(buffer, "JPEG")
-        buffer.seek(0)
+            s3.put_object(
+                Bucket=OUTPUT_BUCKET,
+                Key=output_key,
+                Body=buffer,
+                ContentType=f'image/{target_format.lower()}'
+            )
+        
+        return {
+            'statusCode': 200,
+            'body': f'Converted and uploaded to {OUTPUT_BUCKET}/{output_key}'
+        }
 
-        s3.put_object(Bucket=OUTPUT_BUCKET, Key=output_key, Body=buffer, ContentType='image/jpeg')
+    except UnidentifiedImageError:
+        return {
+            'statusCode': 400,
+            'body': 'Unsupported or corrupted image format.'
+        }
 
-    return {
-        'statusCode': 200,
-        'body': f'Converted and uploaded to {OUTPUT_BUCKET}/{output_key}'
-    }
 ```
 
 Replace `image-output-bucket-<yourname>` with your actual output bucket name.
