@@ -108,13 +108,12 @@ Pillow is not built into Lambda by default. Use a public layer:
 ```
 arn:aws:lambda:us-east-1:770693421928:layer:Klayers-p312-Pillow:1
 ```
-
+OPTION 1:
 Steps:
 1. Go to your Lambda function
 2. Click **Layers → Add a layer**
 3. Choose **"Specify an ARN"** and paste the layer ARN
-
-OPTION 2
+OPTION 2:
 Download pillow-layer, embeded in the main branch within this repo, and upload to Lambda Layers as a custom layer
 ---
 
