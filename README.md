@@ -202,9 +202,54 @@ You should see: `test.jpg`
 
 ---
 
-### Optional Enhancements
+### Troubleshooting Tips
+* Check CloudWatch Logs
+Use the Lambda → Monitor → Logs tab (or go directly to CloudWatch) to view real-time errors, event data, and print/debug logs.
 
-- Resize to a max width/height while maintaining aspect ratio  
-- Store processed images in subfolders  
-- Add support for BMP, GIF, etc.  
-- Tag files with metadata in S3  
+* Start with Common Format (.JPG)
+For early testing, use .JPG files to ensure baseline functionality. Once the flow between the upload and output buckets is stable, begin testing with other formats as supported in your application logic.
+
+* Expect up to 70% file size reduction
+If resizing and compression are applied, especially on large or high-quality images, you can see significant size savings.
+
+* Update the Bucket Name Placeholder
+Remember to replace the OUTPUT_BUCKET variable in your Lambda function with your actual S3 output bucket name.
+
+* Layer Setup Is Critical
+Ensure you add the PIL/Pillow Lambda Layer via the AWS Console by selecting "Layers → Add layer → Specify ARN". If this step is skipped or misconfigured, your function will fail with No module named 'PIL'.
+
+* No Lambda Destinations Needed
+If your Lambda role includes AmazonS3FullAccess, you do not need to configure a Lambda destination.
+
+* S3 Trigger Is Sufficient
+The only trigger your function needs is the S3 Event Notification set to invoke the Lambda when a new object is uploaded (PUT event).
+
+* Add CloudWatch Logging Permissions
+To ensure that Lambda logs are captured, attach the CloudWatchFullAccess policy to the Lambda execution role.
+  Minimum required:
+
+AWSLambdaBasicExecutionRole
+
+CloudWatchFullAccess (or fine-tuned logs permission)
+
+### Optional Enhancements
+Smart Resizing
+Add logic to resize images to a maximum width or height (e.g., 1920px), while preserving aspect ratio.
+
+Output Folder Structure
+Save converted images under a specific subdirectory such as /compressed/ or /processed/.
+
+Multi-Format Support
+Extend processing to include formats like BMP, GIF, and TIFF using Pillow's available modules.
+
+Tag Output Files
+Use s3.put_object_tagging() to attach metadata (e.g., source=converted, quality=low) to help track image flow.
+
+Two-Layer Compression (3-Bucket Architecture)
+Implement a multi-stage pipeline:
+
+Bucket A: Upload input
+
+Bucket B: Convert to JPEG and downscale
+
+Bucket C: Further compress to ultra-light versions or Web-optimized
