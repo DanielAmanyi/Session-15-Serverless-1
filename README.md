@@ -1,6 +1,58 @@
-# Session-15-Serverless
+# Session-15-Serverless Lab 1: Serverless Image Upload and Compression System
 
-## Lab 1: Serverless Image Upload and Compression System
+## Scenario: Automating Image Optimization in a Serverless Architecture
+
+### Background
+
+You are part of a DevOps team responsible for managing infrastructure and automation for a content-heavy application. The product team reports a sharp increase in high-resolution image uploads from users, which is driving up S3 storage costs and slowing down content delivery. Engineering wants a solution that:
+
+- Requires no EC2 or container maintenance  
+- Scales automatically with user uploads  
+- Is cost-effective and observable  
+- Supports future enhancements like tagging, foldering, and analytics  
+
+---
+
+### Your Task (DevOps Perspective)
+
+Design and implement a **serverless image upload and optimization pipeline** using AWS-managed services:
+
+| Requirement           | DevOps Objective                                          |
+|------------------------|------------------------------------------------------------|
+| Accept image uploads   | Configure and secure an input S3 bucket                   |
+| Trigger processing     | Set up event-driven Lambda using S3 trigger              |
+| Image optimization     | Use Lambda (Python + PIL) to convert/resize images       |
+| Store output           | Route optimized images to a separate S3 bucket           |
+| Observe system behavior| Enable CloudWatch logging and monitoring                 |
+| Ensure access control  | Create IAM roles with least-privilege permissions        |
+| Improve file handling  | Add logging, format validation, and error handling       |
+| Optimize cost          | Compress to reduce average image size significantly      |
+
+---
+
+### Why This Matters (DevOps Skill Development)
+
+This lab teaches:
+
+- Event-driven architectures (S3 to Lambda)  
+- Managing Lambda layers and external dependencies (Pillow via public or custom layer)  
+- Role-based access control using IAM  
+- Logging and observability using CloudWatch Logs  
+- S3-based automation without persistent compute resources  
+- Error handling, logging, and fail-safe design  
+- Reusable serverless design patterns for media pipelines  
+
+---
+
+### Real-World Use Case Applications
+
+- Image ingestion for content moderation pipelines  
+- Pre-processing user uploads for blog, portfolio, or gallery sites  
+- Cost optimization for image-heavy S3 workflows  
+- CI/CD-style image pipelines before pushing to production  
+- Lightweight resizing and conversion prior to ML model input  
+
+
 
 ### Objective
 
