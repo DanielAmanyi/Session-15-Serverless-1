@@ -16,7 +16,8 @@ This lab simulates workflows common in photo apps, social media, e-commerce, ima
 
 ### Architecture Overview
 
-![Architecture Diagram](fe7af957-4c6a-42ae-b7b8-731e39df0193.png)
+<img width="468" alt="image" src="https://github.com/user-attachments/assets/4e695e44-884f-473b-8393-650aa7d7772d" />
+
 
 ---
 
