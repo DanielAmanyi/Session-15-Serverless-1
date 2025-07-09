@@ -238,6 +238,7 @@ For other regions, refer to the Klayers GitHub repository.
 
 ### Test the System
 
+** Option 1
 Upload a PNG file to your upload bucket:
 
 ```bash
@@ -251,6 +252,9 @@ aws s3 ls s3://image-output-bucket-<yourname>/uploads/
 ```
 
 You should see: `test.jpg`
+
+** Option 2
+On the console
 
 ---
 
