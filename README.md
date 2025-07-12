@@ -102,7 +102,7 @@ This lab simulates workflows common in photo apps, social media, e-commerce, ima
 3. Choose Lambda as the trusted entity  
 4. Attach the following policies:  
    - `AmazonS3FullAccess` (for testing; use fine-grained access in production)  
-   - `AWSLambdaBasicExecutionRole'
+   - `AWSLambdaFullAccess'
    - `CloudwatchFullAccess'  
 5. Name the role: `lambda-s3-image-role`  
 
