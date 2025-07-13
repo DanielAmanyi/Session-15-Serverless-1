@@ -130,8 +130,8 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 s3 = boto3.client('s3')
-OUTPUT_BUCKET = os.environ['OUTPUT_BUCKET']
-TARGET_QUALITY = 40
+OUTPUT_BUCKET = 'image-output-bucket-dan'  # Change to your actual output bucket
+TARGET_QUALITY = 40  # Low value for aggressive compression
 
 def lambda_handler(event, context):
     logger.info("Event: %s", event)
@@ -147,17 +147,21 @@ def lambda_handler(event, context):
         with Image.open(BytesIO(image_data)) as img:
             logger.info("Original size: %s, mode: %s, format: %s", img.size, img.mode, img.format)
 
+            # Convert to RGB if needed
             if img.mode in ("RGBA", "P"):
                 img = img.convert("RGB")
 
+            # Resize to 30% of original dimensions
             width, height = img.size
             new_size = (int(width * 0.3), int(height * 0.3))
             img = img.resize(new_size, Image.Resampling.LANCZOS)
             logger.info("Resized to: %s", new_size)
 
+            # Strip metadata
             img.info.pop("exif", None)
             img.info.pop("icc_profile", None)
 
+            # Save compressed JPEG
             buffer = BytesIO()
             output_key = os.path.splitext(src_key)[0] + ".jpg"
 
@@ -192,8 +196,9 @@ def lambda_handler(event, context):
             'statusCode': 500,
             'body': "Internal server error during image processing."
         }
-```
 
+```
+optional
 Add the following Lambda environment variable:
 
 - Key: `OUTPUT_BUCKET`  
