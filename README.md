@@ -214,7 +214,7 @@ Pillow is not included in the Lambda runtime by default.
 Use this public Layer ARN for Python 3.13 in us-east-1:
 
 ```
-arn:aws:lambda:us-east-1:770693421928:layer:Klayers-p313-Pillow:1
+arn:aws:lambda:us-east-1:225989350860:layer:pillow-layer:1
 ```
 
 To add:
