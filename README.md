@@ -115,7 +115,8 @@ Note: `AWSLambdaBasicExecutionRole` provides required permissions for CloudWatch
 1. Open the Lambda Console  
 2. Click Create function  
    - Name: `ImageConverter`  
-   - Runtime: `Python 3.9`  
+   - Runtime: `Python 3.9`
+   - Architecture
    - Role: Choose existing → `lambda-s3-image-role`  
 3. Replace the default code with the following:
 
