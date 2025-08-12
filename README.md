@@ -1,4 +1,5 @@
-# Session-15-Serverless Lab 1: Serverless Image Upload and Compression System
+# Session-15-Serverless 
+# Lab 1: Serverless Image Upload and Compression System
 
 ## Scenario: Automating Image Optimization in a Serverless Architecture
 
