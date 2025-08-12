@@ -115,7 +115,7 @@ Note: `AWSLambdaBasicExecutionRole` provides required permissions for CloudWatch
 1. Open the Lambda Console  
 2. Click Create function  
    - Name: `ImageConverter`  
-   - Runtime: `Python 3.13`  
+   - Runtime: `Python 3.9`  
    - Role: Choose existing → `lambda-s3-image-role`  
 3. Replace the default code with the following:
 
@@ -211,10 +211,10 @@ Then Deploy the function.
 ### Step 4: Add Pillow Layer to Lambda
 
 Pillow is not included in the Lambda runtime by default.  
-Use this public Layer ARN for Python 3.13 in us-east-1:
+Use this public Layer ARN for Python 3.13 9 us-east-1:
 
 ```
-arn:aws:lambda:us-east-1:225989350860:layer:pillow-layer:1
+	arn:aws:lambda:us-east-1:770693421928:layer:Klayers-p39-pillow:1
 ```
 
 To add:
